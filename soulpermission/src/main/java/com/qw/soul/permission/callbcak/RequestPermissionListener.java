@@ -13,6 +13,6 @@ public interface RequestPermissionListener {
      *
      * @param permissions 封装权限的数组
      */
-    void onPermissionResult(Permission[] permissions);
+    void onResult(Permission[] permissions);
 
 }

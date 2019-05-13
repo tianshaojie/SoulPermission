@@ -21,14 +21,7 @@ public class UtilsWithPermission {
      */
     public static void makeCall(final Context context, final String phoneNumber) {
         SoulPermission.getInstance().checkAndRequestPermission(Manifest.permission.CALL_PHONE,
-                new CheckPermissionWithRationaleAdapter("如果你拒绝了权限，你将无法拨打电话，请点击授予权限",
-                        new Runnable() {
-                            @Override
-                            public void run() {
-                                //retry
-                                makeCall(context, phoneNumber);
-                            }
-                        }) {
+                new CheckPermissionWithRationaleAdapter("如果你拒绝了权限，你将无法拨打电话，请点击授予权限") {
                     @Override
                     public void onPermissionOk(Permission permission) {
                         Intent intent = new Intent(Intent.ACTION_CALL);

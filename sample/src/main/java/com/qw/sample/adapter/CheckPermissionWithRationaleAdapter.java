@@ -25,8 +25,12 @@ public abstract class CheckPermissionWithRationaleAdapter implements CheckReques
         this.retryRunnable = retryRunnable;
     }
 
+    public CheckPermissionWithRationaleAdapter(String rationaleMessage) {
+        this.rationaleMessage = rationaleMessage;
+    }
+
     @Override
-    public void onPermissionDenied(Permission permission) {
+    public void onPermissionDenied(final Permission permission) {
         Activity activity = SoulPermission.getInstance().getTopActivity();
         if (null == activity) {
             return;
@@ -41,7 +45,14 @@ public abstract class CheckPermissionWithRationaleAdapter implements CheckReques
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             //用户确定以后，重新执行请求原始流程
-                            retryRunnable.run();
+//                            retryRunnable.run();
+
+                            SoulPermission.getInstance().checkAndRequestPermission(permission.permissionName, new CheckPermissionWithRationaleAdapter(rationaleMessage) {
+                                @Override
+                                public void onPermissionOk(Permission permission) {
+                                    CheckPermissionWithRationaleAdapter.this.onPermissionOk(permission);
+                                }
+                            });
                         }
                     }).create().show();
         } else {

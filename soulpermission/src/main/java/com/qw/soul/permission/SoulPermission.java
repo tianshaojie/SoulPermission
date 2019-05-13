@@ -10,6 +10,7 @@ import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
+
 import com.qw.soul.permission.bean.Permission;
 import com.qw.soul.permission.bean.Permissions;
 import com.qw.soul.permission.bean.Special;
@@ -19,6 +20,7 @@ import com.qw.soul.permission.callbcak.RequestPermissionListener;
 import com.qw.soul.permission.checker.CheckerFactory;
 import com.qw.soul.permission.debug.PermissionDebug;
 import com.qw.soul.permission.request.PermissionRequester;
+import com.qw.soul.permission.utils.PermissionTools;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -86,7 +88,7 @@ public class SoulPermission {
      * @return 返回检查的结果
      * @see #checkPermissions
      */
-    public Permission checkSinglePermission(@NonNull String permission) {
+    public Permission checkPermission(@NonNull String permission) {
         return checkPermissions(permission)[0];
     }
 
@@ -129,13 +131,13 @@ public class SoulPermission {
     public void checkAndRequestPermission(@NonNull final String permissionName, @NonNull final CheckRequestPermissionListener listener) {
         checkAndRequestPermissions(Permissions.build(permissionName), new CheckRequestPermissionsListener() {
             @Override
-            public void onAllPermissionOk(Permission[] allPermissions) {
-                listener.onPermissionOk(allPermissions[0]);
+            public void onGranted(Permission[] allPermissions) {
+                listener.onGranted(allPermissions[0]);
             }
 
             @Override
-            public void onPermissionDenied(Permission[] refusedPermissions) {
-                listener.onPermissionDenied(refusedPermissions[0]);
+            public void onDenied(Permission[] deniedPermissions) {
+                listener.onDenied(deniedPermissions[0]);
             }
         });
     }
@@ -155,7 +157,7 @@ public class SoulPermission {
         // all permissions ok
         if (refusedPermissionList.length == 0) {
             PermissionDebug.d(TAG, "all permissions ok");
-            listener.onAllPermissionOk(checkResult);
+            listener.onGranted(checkResult);
             return;
         }
         //can request runTime permission
@@ -163,7 +165,7 @@ public class SoulPermission {
             requestPermissions(Permissions.build(refusedPermissionList), listener);
         } else {
             PermissionDebug.d(TAG, "some permission refused but can not request");
-            listener.onPermissionDenied(refusedPermissionList);
+            listener.onDenied(refusedPermissionList);
         }
 
     }
@@ -210,7 +212,8 @@ public class SoulPermission {
         registerLifecycle(globalContext);
     }
 
-    private SoulPermission() {}
+    private SoulPermission() {
+    }
 
     private void registerLifecycle(Application context) {
         if (null != lifecycle) {
@@ -281,7 +284,7 @@ public class SoulPermission {
                 .withPermission(permissionsToRequest)
                 .request(new RequestPermissionListener() {
                     @Override
-                    public void onPermissionResult(Permission[] permissions) {
+                    public void onResult(Permission[] permissions) {
                         //this list contains all the refused permissions after request
                         List<Permission> refusedListAfterRequest = new LinkedList<>();
                         for (Permission requestResult : permissions) {
@@ -291,10 +294,10 @@ public class SoulPermission {
                         }
                         if (refusedListAfterRequest.size() == 0) {
                             PermissionDebug.d(TAG, "all permission are request ok");
-                            listener.onAllPermissionOk(permissionsToRequest);
+                            listener.onGranted(permissionsToRequest);
                         } else {
                             PermissionDebug.d(TAG, "some permission are refused size=" + refusedListAfterRequest.size());
-                            listener.onPermissionDenied(PermissionTools.convert(refusedListAfterRequest));
+                            listener.onDenied(PermissionTools.convert(refusedListAfterRequest));
                         }
                     }
                 });

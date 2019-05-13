@@ -1,7 +1,7 @@
 package com.qw.soul.permission.checker;
 
 import android.content.Context;
-import com.qw.soul.permission.PermissionTools;
+import com.qw.soul.permission.utils.PermissionTools;
 import com.qw.soul.permission.bean.Special;
 
 /**

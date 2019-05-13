@@ -1,4 +1,4 @@
-package com.qw.soul.permission;
+package com.qw.soul.permission.utils;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -32,22 +32,22 @@ public class PermissionTools {
         return android.os.Build.VERSION.SDK_INT < M || targetSdkVersion < M;
     }
 
-    static Permission[] convert(List<Permission> permissions) {
+    public static Permission[] convert(List<Permission> permissions) {
         return permissions.toArray(new Permission[0]);
     }
 
-    static boolean assertMainThread() {
+    public static boolean assertMainThread() {
         return Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
     }
 
-    static void toast(Context context, String message) {
+    public static void toast(Context context, String message) {
         if (null == context) {
             return;
         }
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
-    static void jumpPermissionPage(Context context) {
+    public static void jumpPermissionPage(Context context) {
         String name = Build.MANUFACTURER;
         switch (name) {
             case "HUAWEI":

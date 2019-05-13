@@ -30,7 +30,7 @@ dependencies {
                     }
 
                     @Override
-                    public void onPermissionDenied(Permission permission) {
+                    public void onDenied(Permission permission) {
                         Toast.makeText(ApiGuideActivity.this, permission.toString() +
                                 " \n is refused you can not do next things", Toast.LENGTH_SHORT).show();
                     }
@@ -45,13 +45,13 @@ dependencies {
                 //if you want do noting or no need all the callbacks you may use SimplePermissionsAdapter instead
                 new CheckRequestPermissionsListener() {
                     @Override
-                    public void onAllPermissionOk(Permission[] allPermissions) {
+                    public void onGranted(Permission[] allPermissions) {
                         Toast.makeText(ApiGuideActivity.this, allPermissions.length + "permissions is ok" +
                                 " \n  you can do your operations", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
-                    public void onPermissionDenied(Permission[] refusedPermissions) {
+                    public void onDenied(Permission[] refusedPermissions) {
                         Toast.makeText(ApiGuideActivity.this, refusedPermissions[0].toString() +
                                 " \n is refused you can not do next things", Toast.LENGTH_SHORT).show();
                     }
@@ -70,7 +70,7 @@ dependencies {
                     }
 
                     @Override
-                    public void onPermissionDenied(Permission permission) {
+                    public void onDenied(Permission permission) {
                         // see CheckPermissionWithRationaleAdapter
                         if (permission.shouldRationale()) {
                             Toast.makeText(ApiGuideActivity.this, permission.toString() +

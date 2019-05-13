@@ -53,7 +53,7 @@ public class PermissionFragment extends Fragment implements IPermissionActions {
             }
         }
         if (listener != null && getActivity() != null && !getActivity().isDestroyed()) {
-            listener.onPermissionResult(permissionResults);
+            listener.onResult(permissionResults);
         }
     }
 

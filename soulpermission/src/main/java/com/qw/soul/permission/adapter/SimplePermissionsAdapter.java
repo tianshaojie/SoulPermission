@@ -9,12 +9,12 @@ import com.qw.soul.permission.callbcak.CheckRequestPermissionsListener;
  */
 public abstract class SimplePermissionsAdapter implements CheckRequestPermissionsListener {
     @Override
-    public void onAllPermissionOk(Permission[] allPermissions) {
+    public void onGranted(Permission[] allPermissions) {
 
     }
 
     @Override
-    public void onPermissionDenied(Permission[] refusedPermissions) {
+    public void onDenied(Permission[] deniedPermissions) {
 
     }
 }

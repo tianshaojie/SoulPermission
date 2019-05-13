@@ -44,7 +44,7 @@ public class PermissionSupportFragment extends Fragment implements IPermissionAc
             }
         }
         if (listener != null && getActivity() != null && !getActivity().isDestroyed()) {
-            listener.onPermissionResult(permissionResults);
+            listener.onResult(permissionResults);
         }
     }
 
