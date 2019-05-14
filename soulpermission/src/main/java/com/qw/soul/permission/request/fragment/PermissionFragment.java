@@ -5,8 +5,6 @@ import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import com.qw.soul.permission.bean.Permission;
-import com.qw.soul.permission.callbcak.RequestPermissionListener;
-import com.qw.soul.permission.request.IPermissionActions;
 
 import static android.os.Build.VERSION_CODES.M;
 
@@ -17,7 +15,7 @@ public class PermissionFragment extends Fragment implements IPermissionActions {
 
     private static final int REQUEST_CODE = 11;
 
-    private RequestPermissionListener listener;
+    private IPermissionListener listener;
 
     private String[] permissions;
 
@@ -29,7 +27,7 @@ public class PermissionFragment extends Fragment implements IPermissionActions {
 
     @TargetApi(M)
     @Override
-    public void requestPermissions(String[] permissions, RequestPermissionListener listener) {
+    public void requestPermissions(String[] permissions, IPermissionListener listener) {
         this.listener = listener;
         this.permissions = permissions;
     }

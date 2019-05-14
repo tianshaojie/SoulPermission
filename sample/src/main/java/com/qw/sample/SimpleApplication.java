@@ -12,8 +12,7 @@ public class SimpleApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Log.d(SimpleApplication.class.getSimpleName(), "appInit");
+        SoulPermission.init(this);
         SoulPermission.setDebug(true);
-        //no necessary
-//        SoulPermission.init(this);
     }
 }

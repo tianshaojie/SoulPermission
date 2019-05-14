@@ -78,7 +78,7 @@ public class Permission {
      * @return desc of permission
      */
     public String getPermissionNameDesc() {
-        Context context = SoulPermission.getInstance().getContext();
+        Context context = SoulPermission.getContext();
         if (null == context) {
             PermissionDebug.e(TAG, "soul permission do not inited");
             return "";

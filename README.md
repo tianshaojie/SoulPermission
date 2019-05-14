@@ -20,7 +20,7 @@ dependencies {
 #### 基本用法：
 - 一句话版本完成自动判断、权限检查、请求、后续操作：
 ```java
-  SoulPermission.getInstance().checkAndRequestPermission(Manifest.permission.ACCESS_FINE_LOCATION,
+  SoulPermission.requestPermission(Manifest.permission.ACCESS_FINE_LOCATION,
                 //if you want do noting or no need all the callbacks you may use SimplePermissionAdapter instead
                 new CheckRequestPermissionListener() {
                     @Override
@@ -40,7 +40,7 @@ dependencies {
 - 也可以一次请求多项权限
 
 ```java
-  SoulPermission.getInstance().checkAndRequestPermissions(
+  SoulPermission.requestPermissions(
                 Permissions.build(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE),
                 //if you want do noting or no need all the callbacks you may use SimplePermissionsAdapter instead
                 new CheckRequestPermissionsListener() {
@@ -61,7 +61,7 @@ dependencies {
 - 包含shouldShowRequestPermissionRationale的情形
 
 ```java
- SoulPermission.getInstance().checkAndRequestPermission(Manifest.permission.READ_CONTACTS,
+ SoulPermission.requestPermission(Manifest.permission.READ_CONTACTS,
                 new CheckRequestPermissionListener() {
                     @Override
                     public void onPermissionOk(Permission permission) {
@@ -87,19 +87,19 @@ dependencies {
 
 ```java
 //you can also use checkPermissions() for a series of permissions
-Permission checkResult = SoulPermission.getInstance().checkSinglePermission(Manifest.permission.ACCESS_FINE_LOCATION);
+Permission checkResult = SoulPermission.checkSinglePermission(Manifest.permission.ACCESS_FINE_LOCATION);
 ```
 - 检查特殊权限[通知权限]
 
 ```java
- boolean checkResult = SoulPermission.getInstance().checkSpecialPermission(Special.NOTIFICATION);
+ boolean checkResult = SoulPermission.checkSpecialPermission(Special.NOTIFICATION);
 ```
 
 - 跳转到应用设置页
 
 
 ```java
-SoulPermission.getInstance().goPermissionSettings();
+SoulPermission.goPermissionSettings();
 ```
 - 设置debug模式(看日志打印)
 

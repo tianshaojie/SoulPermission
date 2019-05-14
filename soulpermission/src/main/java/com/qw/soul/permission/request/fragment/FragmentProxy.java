@@ -2,9 +2,7 @@ package com.qw.soul.permission.request.fragment;
 
 import android.support.annotation.NonNull;
 
-import com.qw.soul.permission.callbcak.RequestPermissionListener;
 import com.qw.soul.permission.debug.PermissionDebug;
-import com.qw.soul.permission.request.IPermissionActions;
 
 
 /**
@@ -21,7 +19,7 @@ public class FragmentProxy implements IPermissionActions {
     }
 
     @Override
-    public void requestPermissions(@NonNull String[] permissions, RequestPermissionListener listener) {
+    public void requestPermissions(@NonNull String[] permissions, IPermissionListener listener) {
         this.fragmentImp.requestPermissions(permissions, listener);
         PermissionDebug.d(TAG, fragmentImp.getClass().getSimpleName() + " request:" + hashCode());
     }

@@ -1,13 +1,17 @@
 package com.qw.sample;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Toast;
+
 import com.qw.sample.utils.Utils;
 import com.qw.sample.utils.UtilsWithPermission;
+import com.qw.soul.permission.SoulPermission;
+import com.qw.soul.permission.bean.Permission;
+import com.qw.soul.permission.callbcak.RequestPermissionWithRationaleListener;
 
 public class AfterActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_CONTACT = 1;
@@ -16,24 +20,35 @@ public class AfterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_example);
-        findViewById(R.id.bt_call).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                UtilsWithPermission.makeCall(AfterActivity.this, "10086");
+        findViewById(R.id.bt_call).setOnClickListener(view -> {
+            UtilsWithPermission.makeCall(AfterActivity.this, "10086");
 //                makeCall();
-            }
         });
-        findViewById(R.id.bt_choose_contact).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                chooseContact();
-            }
-        });
+        findViewById(R.id.bt_choose_contact).setOnClickListener(view -> chooseContact());
+        findViewById(R.id.bt_read_storage).setOnClickListener(view -> requestReadExternalStoragePermission());
     }
 
+
+    public void requestReadExternalStoragePermission() {
+        String rationaleMessage = "如果您拒绝了权限，将无法选择本地视频，请点击授予权限";
+        SoulPermission.requestPermission(Manifest.permission.READ_EXTERNAL_STORAGE,
+                new RequestPermissionWithRationaleListener(rationaleMessage) {
+                    @Override
+                    public void onGranted(Permission permission) {
+                        toast();
+                    }
+                });
+    }
+
+    private void toast() {
+        Toast.makeText(AfterActivity.this, "已授权", Toast.LENGTH_SHORT).show();
+    }
+
+
+
 //    public void makeCall() {
-//        SoulPermission.getInstance()
-//                .checkAndRequestPermission(Manifest.permission.CALL_PHONE, new CheckRequestPermissionListener() {
+//        SoulPermission
+//                .checkAndRequestPermission(Manifest.permission.CALL_PHONE, new RequestPermissionListener() {
 //                    @Override
 //                    public void onPermissionOk(Permission permission) {
 //                        Utils.makeCall(AfterActivity.this, "10086");

@@ -3,6 +3,8 @@ package com.qw.soul.permission.request;
 import android.app.Activity;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+
+import com.qw.soul.permission.request.fragment.IPermissionActions;
 import com.qw.soul.permission.request.fragment.PermissionFragment;
 import com.qw.soul.permission.request.fragment.PermissionSupportFragment;
 

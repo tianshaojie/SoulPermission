@@ -9,10 +9,16 @@ import com.qw.soul.permission.bean.Permission;
 public interface RequestPermissionListener {
 
     /**
-     * 得到权限检查结果
+     * 权限ok，可做后续的事情
      *
-     * @param permissions 封装权限的数组
+     * @param permission 权限实体类
      */
-    void onResult(Permission[] permissions);
+    void onGranted(Permission permission);
 
+    /**
+     * 权限不ok，被拒绝或者未授予
+     *
+     * @param permission 权限实体类
+     */
+    void onDenied(Permission permission);
 }

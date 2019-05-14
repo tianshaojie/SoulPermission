@@ -1,37 +1,37 @@
-package com.qw.sample.adapter;
+package com.qw.soul.permission.callbcak;
 
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
+
 import com.qw.soul.permission.SoulPermission;
 import com.qw.soul.permission.bean.Permission;
-import com.qw.soul.permission.callbcak.CheckRequestPermissionListener;
 
 /**
  * @author cd5160866
  */
-public abstract class CheckPermissionWithRationaleAdapter implements CheckRequestPermissionListener {
+public abstract class RequestPermissionWithRationaleListener implements RequestPermissionListener {
 
     private String rationaleMessage;
 
-    private Runnable retryRunnable;
+//    private Runnable retryRunnable;
+//
+//    /**
+//     * @param rationaleMessage 当用户首次拒绝弹框时候，根据权限不同给用户不同的文案解释
+//     * @param retryRunnable    用户点重新授权的runnable 即重新执行原方法
+//     */
+//    public RequestPermissionWithRationaleListener(String rationaleMessage, Runnable retryRunnable) {
+//        this.rationaleMessage = rationaleMessage;
+//        this.retryRunnable = retryRunnable;
+//    }
 
-    /**
-     * @param rationaleMessage 当用户首次拒绝弹框时候，根据权限不同给用户不同的文案解释
-     * @param retryRunnable    用户点重新授权的runnable 即重新执行原方法
-     */
-    public CheckPermissionWithRationaleAdapter(String rationaleMessage, Runnable retryRunnable) {
-        this.rationaleMessage = rationaleMessage;
-        this.retryRunnable = retryRunnable;
-    }
-
-    public CheckPermissionWithRationaleAdapter(String rationaleMessage) {
+    public RequestPermissionWithRationaleListener(String rationaleMessage) {
         this.rationaleMessage = rationaleMessage;
     }
 
     @Override
-    public void onPermissionDenied(final Permission permission) {
-        Activity activity = SoulPermission.getInstance().getTopActivity();
+    public void onDenied(final Permission permission) {
+        Activity activity = SoulPermission.getTopActivity();
         if (null == activity) {
             return;
         }
@@ -45,12 +45,10 @@ public abstract class CheckPermissionWithRationaleAdapter implements CheckReques
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             //用户确定以后，重新执行请求原始流程
-//                            retryRunnable.run();
-
-                            SoulPermission.getInstance().checkAndRequestPermission(permission.permissionName, new CheckPermissionWithRationaleAdapter(rationaleMessage) {
+                            SoulPermission.requestPermission(permission.permissionName, new RequestPermissionWithRationaleListener(rationaleMessage) {
                                 @Override
-                                public void onPermissionOk(Permission permission) {
-                                    CheckPermissionWithRationaleAdapter.this.onPermissionOk(permission);
+                                public void onGranted(Permission permission) {
+                                    RequestPermissionWithRationaleListener.this.onGranted(permission);
                                 }
                             });
                         }
@@ -65,7 +63,7 @@ public abstract class CheckPermissionWithRationaleAdapter implements CheckReques
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             //去设置页
-                            SoulPermission.getInstance().goPermissionSettings();
+                            SoulPermission.goPermissionSettings();
                         }
                     }).create().show();
         }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Build;
 import android.os.Bundle;
+
 import com.qw.soul.permission.debug.PermissionDebug;
 import com.qw.soul.permission.exception.ContainerStatusException;
 import com.qw.soul.permission.exception.InitException;

@@ -6,7 +6,7 @@ import com.qw.soul.permission.bean.Permission;
 /**
  * @author cd5160866
  */
-public interface CheckRequestPermissionsListener {
+public interface RequestPermissionsListener {
 
     /**
      * 所有权限ok，可做后续的事情

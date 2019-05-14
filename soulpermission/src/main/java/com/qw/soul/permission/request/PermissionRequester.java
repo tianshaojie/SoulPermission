@@ -4,7 +4,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 
 import com.qw.soul.permission.bean.Permission;
-import com.qw.soul.permission.callbcak.RequestPermissionListener;
+import com.qw.soul.permission.request.fragment.IPermissionListener;
 import com.qw.soul.permission.request.fragment.FragmentProxy;
 
 import static android.os.Build.VERSION_CODES.M;
@@ -46,7 +46,7 @@ public class PermissionRequester {
     }
 
     @TargetApi(M)
-    public void request(RequestPermissionListener listener) {
+    public void request(IPermissionListener listener) {
         if (permissionFragment == null || permissions == null) {
             throw new IllegalArgumentException("fragment or permission is null");
         }

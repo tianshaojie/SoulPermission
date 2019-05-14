@@ -5,17 +5,17 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import com.qw.soul.permission.SoulPermission;
 import com.qw.soul.permission.bean.Permission;
-import com.qw.soul.permission.callbcak.CheckRequestPermissionListener;
+import com.qw.soul.permission.callbcak.RequestPermissionListener;
 
 /**
  * @author cd5160866
  */
-public abstract class CheckPermissionAdapter implements CheckRequestPermissionListener {
+public abstract class CheckPermissionAdapter implements RequestPermissionListener {
 
     @Override
-    public void onPermissionDenied(Permission permission) {
+    public void onDenied(Permission permission) {
         //SoulPermission提供栈顶Activity
-        Activity activity = SoulPermission.getInstance().getTopActivity();
+        Activity activity = SoulPermission.getTopActivity();
         if (null == activity) {
             return;
         }
@@ -27,7 +27,7 @@ public abstract class CheckPermissionAdapter implements CheckRequestPermissionLi
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //去设置页
-                        SoulPermission.getInstance().goPermissionSettings();
+                        SoulPermission.goPermissionSettings();
                     }
                 }).create().show();
     }

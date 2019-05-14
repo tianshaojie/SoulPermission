@@ -1,8 +1,6 @@
-package com.qw.soul.permission.request;
+package com.qw.soul.permission.request.fragment;
 
 import android.annotation.TargetApi;
-
-import com.qw.soul.permission.callbcak.RequestPermissionListener;
 
 import static android.os.Build.VERSION_CODES.M;
 
@@ -18,6 +16,6 @@ public interface IPermissionActions {
      * @param listener    回调
      */
     @TargetApi(M)
-    void requestPermissions(String[] permissions, RequestPermissionListener listener);
+    void requestPermissions(String[] permissions, IPermissionListener listener);
 
 }
