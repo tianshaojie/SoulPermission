@@ -31,25 +31,9 @@ import java.util.List;
 public class SoulPermission {
     private static final String TAG = "SoulPermission";
 
-//    private static volatile SoulPermission instance;
-
     private static Application globalContext;
     private static boolean alreadyInit;
     private static PermissionActivityLifecycle lifecycle;
-
-//    /**
-//     * 获取 SoulPermission 对象
-//     */
-//    public static SoulPermission getInstance() {
-//        if (null == instance) {
-//            synchronized (SoulPermission.class) {
-//                if (instance == null) {
-//                    instance = new SoulPermission();
-//                }
-//            }
-//        }
-//        return instance;
-//    }
 
     /**
      * 设置debug
@@ -199,17 +183,6 @@ public class SoulPermission {
     public static void goPermissionSettings() {
         PermissionTools.jumpPermissionPage(getContext());
     }
-
-//    void autoInit(Application application) {
-//        if (null != globalContext) {
-//            return;
-//        }
-//        globalContext = application;
-//        registerLifecycle(globalContext);
-//    }
-
-//    private SoulPermission() {
-//    }
 
     static private void registerLifecycle(Application context) {
         if (null != lifecycle) {
