@@ -27,4 +27,24 @@
             android:layout_height="wrap_content"
             android:text="Read Storage"/>
 
+    <Button
+            android:textAllCaps="false"
+            android:id="@+id/bt_get_imei"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Get Imei"/>
+
+    <Button
+        android:textAllCaps="false"
+        android:id="@+id/bt_get_imsi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Imsi"/>
+
+    <Button
+        android:textAllCaps="false"
+        android:id="@+id/bt_go_seeting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Go Setting"/>
 </LinearLayout>
