@@ -40,4 +40,15 @@
             android:layout_height="wrap_content"
             android:text="API_Guide"/>
 
+    <TextView
+            android:text="demo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    <Button
+            android:textAllCaps="false"
+            android:onClick="logFilePath"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="File Path"/>
+
 </LinearLayout>
